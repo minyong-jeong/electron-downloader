@@ -1,0 +1,19 @@
+{
+  "name": "electron-downloader",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "Minyong Jeong",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^7.1.3"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "request": "^2.88.0"
+  }
+}
