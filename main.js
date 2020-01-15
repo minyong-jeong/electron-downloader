@@ -8,15 +8,16 @@ let win = null;
 function createWindow() {
     win = new BrowserWindow({
         width: 300,
-        height: 370,
+        height: 400,
         // transparent: true,   // transparent background
-        frame: false,        // frameless window
+        // frame: false,        // frameless window
         resizable: false,
         webPreferences: {
             nodeIntegration: true
         }
     });
 
+    win.setMenu(null);
     win.loadFile('index.html');
 
     // DevTools
