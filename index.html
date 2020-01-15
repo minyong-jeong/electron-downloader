@@ -30,7 +30,7 @@
             <button class="control-btn" id="exit">Exit</button>
         </div>
         <div>
-            <div id="progress-bar"></div>
+            <div id="progress-bar">Electron Downloader</div>
         </div>
     </div>
     <script>
@@ -40,7 +40,8 @@
         const progressBar = document.getElementById('progress-bar')
 
         updateBtn.addEventListener('click', () => {
-            progressBar.style.opacity = "1";
+            progressBar.innerHTML = ""
+            progressBar.style.textAlign = "left";
             ipcRenderer.send('request-test');
         });
 
