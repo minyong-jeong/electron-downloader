@@ -4,29 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Electron</title>
+    <link rel="stylesheet" href="index.css">
+    <title>Electron Downloader</title>
 </head>
 <body>
-    <h1>Electron</h1>
-    <button id="test">button</button>
-    <progress id="progress-bar" value="0" max="100"></progress>
+    <div class="drag-window-bar"></div>
+    <div class="main">
+        <div class="img-area">
+            <div id="img"></div>
+            <div class="clock">
+                <div class="movement hour">
+                    <div class="hand"></div>
+                </div>
+                <div class="movement minute">
+                    <div class="hand"></div>
+                </div>
+                <div class="movement second">
+                    <div class="hand"></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="control-btn" id="open">Open</button>
+            <button class="control-btn" id="update">Update</button>
+            <button class="control-btn" id="exit">Exit</button>
+        </div>
+        <div>
+            <div id="progress-bar"></div>
+        </div>
+    </div>
     <script>
-        const { ipcRenderer } = require('electron')
-        
-        const testBtn = document.getElementById('test')
-        testBtn.addEventListener('click', (event) => {
-            ipcRenderer.send('request-test');
-            
-        })
-
+        const { ipcRenderer } = require('electron');
+        const updateBtn = document.getElementById('update');
+        const exitBtn = document.getElementById('exit');
         const progressBar = document.getElementById('progress-bar')
+
+        updateBtn.addEventListener('click', () => {
+            progressBar.style.opacity = "1";
+            ipcRenderer.send('request-test');
+        });
+
+        exitBtn.addEventListener('click', () => {
+            window.close();
+        });
+
         ipcRenderer.on('download-percent', (event, percent) => {
-            console.log(percent)
-            progressBar.value = percent
-            if (percent == 100) {
-                testBtn.disabled = true;
+            let num = percent / 10
+            let bar = ""
+            for (var i = 0; i < num; i++) {
+                bar += "👏"
             }
-        })
+            progressBar.innerHTML = bar;
+
+            // if (percent == 100) {
+            //     updateBtn.style.cursor = "not-allowed";
+            //     updateBtn.disabled = true;
+            // }
+        });
     </script>
+    <script src="js/clock.js"></script>
 </body>
 </html>
